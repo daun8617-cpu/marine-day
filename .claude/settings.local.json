@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx storybook@latest init --yes 2>&1)",
+      "PowerShell(npm install *)",
+      "PowerShell(node -e \"const pkg = require\\('./package.json'\\); const deps = {...pkg.dependencies, ...pkg.devDependencies}; ['vite','react','typescript','tailwindcss','storybook','@storybook/react-vite','@storybook/addon-designs','@storybook/addon-docs'].forEach\\(k => console.log\\(k + ': ' + \\(deps[k] || '\\(not found\\)'\\)\\)\\)\" 2>&1)",
+      "PowerShell(npm run *)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__download_assets",
+      "mcp__claude_ai_Figma__get_motion_context",
+      "Bash(curl -sL -o emblem-top.png \"https://www.figma.com/api/mcp/asset/0a548467-b3b0-4364-b3c2-a91619b8827d\")",
+      "Bash(curl -sL -o emblem-group-a.png \"https://www.figma.com/api/mcp/asset/620c5b29-6867-4e36-80bd-b0fd78b74220\")",
+      "Bash(curl -sL -o emblem-group-b.png \"https://www.figma.com/api/mcp/asset/03483ee5-e8d8-42c5-99aa-5626dcf84d41\")",
+      "Bash(curl -sL -o line-title.png \"https://www.figma.com/api/mcp/asset/a1ed0f6b-87ad-4999-a7aa-60026d86d638\")",
+      "Bash(curl -sL -o line-section.png \"https://www.figma.com/api/mcp/asset/904c1017-d523-442a-a55c-d40f60cea9d4\")",
+      "Bash(mv emblem-top.png emblem-top.svg)",
+      "Bash(mv emblem-group-a.png emblem-group-a.svg)",
+      "Bash(mv emblem-group-b.png emblem-group-b.svg)",
+      "Bash(mv status-right.png status-right.svg)",
+      "Bash(mv line-title.png line-title.svg)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/)",
+      "mcp__f90ac5dd-a945-4246-ae21-6b9c576e99a3__get_design_context",
+      "mcp__f90ac5dd-a945-4246-ae21-6b9c576e99a3__get_metadata",
+      "PowerShell(Get-Command gh -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command git -ErrorAction SilentlyContinue)",
+      "PowerShell(winget install --id GitHub.cli -e --silent --accept-package-agreements --accept-source-agreements)",
+      "Bash(sleep 3; cat \"/c/Users/daun/AppData/Local/Temp/claude/C--Users-daun-Desktop-fastcampus2/fcacffb8-2aed-400a-8110-7bd1af8d4508/scratchpad/gh_auth.log\")",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
