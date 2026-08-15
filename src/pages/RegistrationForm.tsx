@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import type { FormEvent } from 'react'
 import statusRight from '../assets/marine-day/status-right.svg'
 import arrowLeft from '../assets/marine-day/arrow-left.svg'
 import check from '../assets/marine-day/check.svg'
@@ -10,28 +10,31 @@ export type RegistrationData = {
   organization: string
 }
 
+export type RegistrationFormState = RegistrationData & { agreed: boolean }
+
 const inputClass =
   'w-full rounded-[12px] border border-[#1e293b] bg-[#0f2b48] px-[16px] py-[14px] text-[15px] text-white placeholder:text-[#94a3b8] outline-none focus:border-[#0ae9e0]'
 
 export default function RegistrationForm({
+  value,
+  onChange,
   onBack,
+  onViewPrivacyPolicy,
   onSubmit,
 }: {
+  value: RegistrationFormState
+  onChange: (next: RegistrationFormState) => void
   onBack: () => void
-  onSubmit?: (data: RegistrationData) => void
+  onViewPrivacyPolicy: () => void
+  onSubmit: (data: RegistrationData) => void
 }) {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [organization, setOrganization] = useState('')
-  const [agreed, setAgreed] = useState(false)
-
+  const { name, phone, email, organization, agreed } = value
   const isValid = name.trim() !== '' && phone.trim() !== '' && email.trim() !== '' && agreed
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!isValid) return
-    onSubmit?.({ name, phone, email, organization })
+    onSubmit({ name, phone, email, organization })
   }
 
   return (
@@ -80,7 +83,7 @@ export default function RegistrationForm({
                 <input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => onChange({ ...value, name: e.target.value })}
                   placeholder="이름을 입력해 주세요"
                   required
                   className={inputClass}
@@ -91,7 +94,7 @@ export default function RegistrationForm({
                 <input
                   type="tel"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => onChange({ ...value, phone: e.target.value })}
                   placeholder="010-0000-0000"
                   required
                   className={inputClass}
@@ -102,7 +105,7 @@ export default function RegistrationForm({
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => onChange({ ...value, email: e.target.value })}
                   placeholder="marine.kim@ocean.com"
                   required
                   className={inputClass}
@@ -116,7 +119,7 @@ export default function RegistrationForm({
                 <input
                   type="text"
                   value={organization}
-                  onChange={(e) => setOrganization(e.target.value)}
+                  onChange={(e) => onChange({ ...value, organization: e.target.value })}
                   placeholder="소속을 입력해 주세요"
                   className={inputClass}
                 />
@@ -127,7 +130,7 @@ export default function RegistrationForm({
               <input
                 type="checkbox"
                 checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
+                onChange={(e) => onChange({ ...value, agreed: e.target.checked })}
                 required
                 className="sr-only"
               />
@@ -140,7 +143,13 @@ export default function RegistrationForm({
               <span className="flex-1 text-[13px]">
                 개인정보 수집 및 이용 동의 <span className="font-semibold text-[#ff6f5e]">(필수)</span>
               </span>
-              <span className="shrink-0 text-[12px] text-[#94a3b8] underline">보기</span>
+              <button
+                type="button"
+                onClick={onViewPrivacyPolicy}
+                className="shrink-0 text-[12px] text-[#94a3b8] underline"
+              >
+                보기
+              </button>
             </label>
           </div>
         </div>
